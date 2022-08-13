@@ -77,7 +77,7 @@ const mergeSort = (array) => {
 
 const removeDuplicates = (array) => {
     let arrayResult = [];
-
+    
     array.forEach(number => {
         if(!arrayResult.includes(number)){
             arrayResult.push(number);
@@ -87,8 +87,10 @@ const removeDuplicates = (array) => {
 };
 
 const sanitizeArray = (array) => {
-    let result;
+    let result = [];
     result = removeDuplicates(array);
     result = mergeSort(result);
     return result;
 }
+
+module.exports = {sanitizeArray};
