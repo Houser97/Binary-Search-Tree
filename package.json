@@ -1,0 +1,22 @@
+{
+  "name": "binary-search-tree",
+  "version": "1.0.0",
+  "description": "This project revolves around creating a balanced binary tree and implementing its methods to manipulate data, which serves a hands-on approach to enhance the user's knowledge of the subject.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Houser97/Binary-Search-Tree.git"
+  },
+  "author": "Arturo",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Houser97/Binary-Search-Tree/issues"
+  },
+  "homepage": "https://github.com/Houser97/Binary-Search-Tree#readme",
+  "devDependencies": {
+    "nodemon": "^2.0.19"
+  }
+}

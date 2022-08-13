@@ -1,1 +1,2 @@
 # Binary-Search-Tree
+This project revolves around creating a balanced binary tree and implementing its methods to manipulate data, which serves a hands-on approach to enhance the user's knowledge of the subject.
