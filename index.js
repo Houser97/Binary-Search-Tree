@@ -7,26 +7,43 @@ class Node {
 };
 
 class Tree {
-    constructor(root){
-        this.root = root;
+    constructor(array){
+        this.array = [...sanitizeArray(array)];
+        this.root = this.buildTree(this.array, 0, this.array.length - 1);
     };
+
+    buildTree(array, start, end){
+
+        //Caso base.
+        if(start > end){
+            return null;
+        };
+    
+        let mid = Math.floor((start+end)/2);
+        let node = new Node(array[mid]); 
+    
+        node.left = this.buildTree(array, start, mid-1);
+        node.right = this.buildTree(array, mid+1, end );
+    
+        return node;
+    };
+
+    insert(root, value){
+        if(root === null){
+            root = new Node(value);
+            return root;
+        };
+
+        if(root.data < value){
+            root.right = this.insert(root.right, value);
+        };
+        if(root.data > value){
+            root.left = this.insert(root.left, value);
+        };
+
+        return root;
+    }
 };
-
-function sortedArrayToBST(array, start, end){
-
-    //Caso base.
-    if(start > end){
-        return null;
-    };
-
-    let mid = Math.floor((start+end)/2);
-    let node = new Node(array[mid]); 
-
-    node.left = sortedArrayToBST(array, start, mid-1);
-    node.right = sortedArrayToBST(array, mid+1, end );
-
-    return node;
-}
 
 const mergeSort = (array) => {
     if(array.length <= 1) return array;
@@ -93,4 +110,14 @@ const sanitizeArray = (array) => {
     return result;
 }
 
+
+
+let array = [1,2,3,4];
+
+let tree = new Tree(array)
+
+console.log(tree);
+console.log(tree.insert(tree.root, 0));
+console.log(tree.insert(tree.root, 1.5));
+console.log(tree.insert(tree.root, 3.5));
 module.exports = {sanitizeArray};
