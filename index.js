@@ -89,6 +89,18 @@ class Tree {
             nextBiggerNode = root.value;
         };
         return nextBiggerNode;
+    };
+
+    find(root, value){
+        if(root.data === value || root === null){
+            return root;
+        };
+
+        if(value < root.data){
+            return this.find(root.left, value);
+        } else if(value > root.data){
+            return this.find(root.right, value);
+        };
     }
 };
 
@@ -164,7 +176,8 @@ let array = [1,2,3,4,5,6,7,8];
 let tree = new Tree(array)
 
 console.log(tree);
-console.log(tree.remove(tree.root, 6));
+//console.log(tree.remove(tree.root, 6));
+console.log(tree.find(tree.root, 8));
 
 
 module.exports = {sanitizeArray};
