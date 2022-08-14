@@ -42,6 +42,53 @@ class Tree {
         };
 
         return root;
+    };
+
+    remove(root, value){
+        //Caso base: El árbol está vacío o el nodo a eliminar no está en el espacio de búsqueda.
+        if(root === null){
+            return root;
+        };
+
+        // 1) Buscar el nodo a eliminar recursivamente.
+        // Se asigna el nodo a retornar a RIGHT o LEFT, ya que deben apuntar apuntar a NULL o al hijo
+        // del nodo a eliminar.
+        if(value > root.data){
+            root.right = this.remove(root.right, value);
+        } else if (value < root.data){
+            root.left = this.remove(root.left, value)
+        } else { //En otro caso, el valor es igual al del nodo, por lo que se halló el nodo a eliminar.
+        //2) Revisar que el nodo a eliminar tenga hijos
+            // 2.1) Si el nodo no tiene hijos, o solo 1.
+            if(root.left === null){
+                return root.right;
+            } else if (root.right === null){
+                return root.left;
+            } else {
+                //2.2) El nodo tiene dos hijos, por lo que se debe hallar el valor máximo más próximo
+                // al del nodo a eliminar al caminar por la parte derecha del árbol hasta llegar al nodo
+                // hoja más a la izquierda.
+
+                root.data = this.nextBiggerNode(root.right);
+
+                //2.3) Una vez hallado el valor del nodo próximo más grande, se debe revisar que no tenga
+                // hijos, o si tiene dos repetir este proceso.
+
+                root.right = this.remove(root.right, root.data);
+
+            };
+        };
+        //Si no se retorna acá entonces ELSE jamás va a retornar el resultado.
+        return root;
+    };
+
+    nextBiggerNode(root){
+        let nextBiggerNode = root.data;
+        while(root.left !== null){
+            root = root.left;
+            nextBiggerNode = root.value;
+        };
+        return nextBiggerNode;
     }
 };
 
@@ -112,12 +159,12 @@ const sanitizeArray = (array) => {
 
 
 
-let array = [1,2,3,4];
+let array = [1,2,3,4,5,6,7,8];
 
 let tree = new Tree(array)
 
 console.log(tree);
-console.log(tree.insert(tree.root, 0));
-console.log(tree.insert(tree.root, 1.5));
-console.log(tree.insert(tree.root, 3.5));
+console.log(tree.remove(tree.root, 6));
+
+
 module.exports = {sanitizeArray};
