@@ -263,6 +263,37 @@ class Tree {
         return result;
 
     };
+
+    height(root){
+        if(root === null){
+            return 0;
+        };
+        
+        let heightLeft = this.height(root.left);
+        let heighRight = this.height(root.right);
+
+        if(heightLeft > heighRight) return heightLeft+1;
+        else return heighRight+1;
+    };
+
+    height2(root){
+        if(root === null){
+            return 0;
+        };
+        
+        return 1 + Math.max(this.height2(root.left), this.height2(root.right));
+    }
+
+    height3(root){
+        if(root === null){
+            return -1;
+        };
+        
+        let heightLeft = this.height(root.left);
+        let heighRight = this.height(root.right);
+
+        return Math.max(heightLeft, heighRight) + 1;
+    }
 };
 
 const mergeSort = (array) => {
@@ -348,6 +379,8 @@ console.log(tree.levelOrderIterative(tree.root, function(num){
 console.log(tree.inorder(tree.root) + ' Inorder');
 console.log(tree.preorder(tree.root) + ' Preorder');
 console.log(tree.postorder(tree.root) + ' Postorder');
+console.log(tree.height(tree.root) + ' Height');
+console.log(tree.height3(tree.root) + ' Height3');
 
 
 module.exports = {sanitizeArray};
