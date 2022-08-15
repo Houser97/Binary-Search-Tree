@@ -10,6 +10,10 @@ class Tree {
     constructor(array){
         this.array = [...sanitizeArray(array)];
         this.root = this.buildTree(this.array, 0, this.array.length - 1);
+        this.inOrder = [];
+        this.postOrder = [];
+        this.inLevel = [];
+        this.preOrder = [];
     };
 
     buildTree(array, start, end){
@@ -403,7 +407,7 @@ const sanitizeArray = (array) => {
 
 
 
-let array = [1,2,3,4,5,6,7,8];
+let array = [0,1,5,3,7,10,15,21];
 
 let tree = new Tree(array)
 
@@ -416,10 +420,10 @@ console.log(tree);
 // }) + ' Iterativo');
 //console.log(tree.levelOrderSecondMethod(tree.root) + ' Recursivo');
 
-// console.log(tree.inorder(tree.root) + ' Inorder');
-// console.log(tree.preorder(tree.root) + ' Preorder');
-// console.log(tree.postorder(tree.root) + ' Postorder');
-// console.log(tree.height(tree.root) + ' Height');
+ console.log(tree.inorder(tree.root) + ' Inorder');
+ console.log(tree.preorder(tree.root) + ' Preorder');
+ console.log(tree.postorder(tree.root) + ' Postorder');
+ console.log(tree.height(tree.root) + ' Height');
 // console.log(tree.height3(tree.root) + ' Height3');
 console.log(tree.depth(4) + ' Depth');
 console.log(tree.insert(this.root,10) + ' insert');
