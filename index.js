@@ -276,23 +276,47 @@ class Tree {
         else return heighRight+1;
     };
 
-    height2(root){
-        if(root === null){
+    // height2(root){
+    //     if(root === null){
+    //         return 0;
+    //     };
+        
+    //     return 1 + Math.max(this.height2(root.left), this.height2(root.right));
+    // }
+
+    // height3(root){
+    //     if(root === null){
+    //         return -1;
+    //     };
+        
+    //     let heightLeft = this.height(root.left);
+    //     let heighRight = this.height(root.right);
+
+    //     return Math.max(heightLeft, heighRight) + 1;
+    // }
+
+    depth(desiredeNode){
+        let result = this.recursiveDepth(this.root, desiredeNode)
+        if(result === 0) return 'Such node is not in the tree.'
+        else return result-1;
+    };
+
+    recursiveDepth(root = this.root, node){
+        if(root === null) return 0;
+        if(root.data === node) return 1;
+
+        let height = 0;
+
+        if(height === 0){
+            height = this.recursiveDepth(root.left, node);
+        }
+        if(height === 0){
+            height = this.recursiveDepth(root.right, node);
+        }
+
+        if(height === 0){
             return 0;
-        };
-        
-        return 1 + Math.max(this.height2(root.left), this.height2(root.right));
-    }
-
-    height3(root){
-        if(root === null){
-            return -1;
-        };
-        
-        let heightLeft = this.height(root.left);
-        let heighRight = this.height(root.right);
-
-        return Math.max(heightLeft, heighRight) + 1;
+        } else return height + 1;
     }
 };
 
@@ -371,16 +395,17 @@ console.log(tree);
 //console.log(tree.remove(tree.root, 6));
 //console.log(tree.find(tree.root, 8));
 
-console.log(tree.levelOrderIterative(tree.root, function(num){
-    return num < 3;
-}) + ' Iterativo');
+// console.log(tree.levelOrderIterative(tree.root, function(num){
+//     return num < 3;
+// }) + ' Iterativo');
 //console.log(tree.levelOrderSecondMethod(tree.root) + ' Recursivo');
 
-console.log(tree.inorder(tree.root) + ' Inorder');
-console.log(tree.preorder(tree.root) + ' Preorder');
-console.log(tree.postorder(tree.root) + ' Postorder');
-console.log(tree.height(tree.root) + ' Height');
-console.log(tree.height3(tree.root) + ' Height3');
+// console.log(tree.inorder(tree.root) + ' Inorder');
+// console.log(tree.preorder(tree.root) + ' Preorder');
+// console.log(tree.postorder(tree.root) + ' Postorder');
+// console.log(tree.height(tree.root) + ' Height');
+// console.log(tree.height3(tree.root) + ' Height3');
+console.log(tree.depth(4) + ' Depth');
 
 
 module.exports = {sanitizeArray};
