@@ -28,7 +28,7 @@ class Tree {
         return node;
     };
 
-    insert(root, value){
+    insert(root = this.root, value){
         if(root === null){
             root = new Node(value);
             return root;
@@ -317,6 +317,17 @@ class Tree {
         if(height === 0){
             return 0;
         } else return height + 1;
+    };
+
+    isBalanced(){
+        let heightLeft = this.height(this.root.left);
+        let heightRight = this.height(this.root.right);
+        
+        if(heightLeft === heightRight || heightLeft + 1 === heightRight || heightRight + 1 === heightLeft){
+            return 'This tree is balanced';
+        }else {
+            return 'This tree is not balanced';
+        }
     }
 };
 
@@ -406,6 +417,9 @@ console.log(tree);
 // console.log(tree.height(tree.root) + ' Height');
 // console.log(tree.height3(tree.root) + ' Height3');
 console.log(tree.depth(4) + ' Depth');
+console.log(tree.insert(this.root,10) + ' insert');
+console.log(tree.insert(this.root,0) + ' insert');
+console.log(tree.isBalanced() + ' Balanced');
 
 
 module.exports = {sanitizeArray};
