@@ -328,6 +328,11 @@ class Tree {
         }else {
             return 'This tree is not balanced';
         }
+    };
+
+    rebalance(){
+        this.array = this.inorder(this.root);
+        this.root = this.buildTree(this.array, 0, this.array.length - 1);
     }
 };
 
@@ -418,7 +423,9 @@ console.log(tree);
 // console.log(tree.height3(tree.root) + ' Height3');
 console.log(tree.depth(4) + ' Depth');
 console.log(tree.insert(this.root,10) + ' insert');
-console.log(tree.insert(this.root,0) + ' insert');
+console.log(tree.isBalanced() + ' Balanced');
+tree.rebalance();
+console.log(tree);
 console.log(tree.isBalanced() + ' Balanced');
 
 
