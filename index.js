@@ -324,9 +324,9 @@ class Tree {
         let heightRight = this.height(this.root.right);
         
         if(heightLeft === heightRight || heightLeft + 1 === heightRight || heightRight + 1 === heightLeft){
-            return 'This tree is balanced';
+            return 'This tree is balanced.';
         }else {
-            return 'This tree is not balanced';
+            return 'This tree is not balanced.';
         }
     };
 
@@ -429,4 +429,4 @@ console.log(tree);
 console.log(tree.isBalanced() + ' Balanced');
 
 
-module.exports = {sanitizeArray};
+module.exports = {sanitizeArray, Node, Tree};
