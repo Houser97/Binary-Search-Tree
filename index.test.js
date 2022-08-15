@@ -21,6 +21,11 @@ describe('Tree tests', () => {
         expect(tree.isBalanced()).toBe('This tree is not balanced.')
     });
 
+    it('the rebalance method must rebalance an unbalanced tree', () => {
+        tree.rebalance();
+        expect(tree.isBalanced()).toBe('This tree is balanced.')
+    })
+
     describe('Tests for the inorder, preorder, postorder, and in level methods', () => {
         let array2 = [0,1,5,3,7,10,15,21];
         let tree2 = new Tree(array2);
