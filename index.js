@@ -196,7 +196,7 @@ class Tree {
         if(resultPrev !== null){
             result = [...result, ...resultPrev];
         }; 
-        result = [...result, root.data]
+        result = [...result, root.data] // SI se coloca antes del IF anterior retorna orden PREORDER
         resultPrev = this.inorder(root.right);
         if(resultPrev !== null){
             result = [...result, ...resultPrev];
@@ -204,6 +204,35 @@ class Tree {
         // Ahora se debe ir a la derecha, si es que hay algún nodo. De lo contrario, se acaba ahí
         // la función y se regresa a este contexto, en donde se puede retornar RESULT.
         return result;
+    };
+
+    preorder(root){
+        if(root === null) return null;
+
+        let result = [];
+        let prevToResult;
+
+        // Paso 1. Leer el nodo.
+        result.push(root.data);
+
+        // Paso 2. Ir hacia la izquierda.
+        prevToResult = this.preorder(root.left);
+
+            // Paso 2.1. Almacenar el valor retornado por la función si es diferente de NULL.
+        if(prevToResult !== null){
+            result = [...result, ...prevToResult];
+        }
+        
+        // Paso 3. Cuando ya no hay elementos a la izquierda, o ya se leyeron, ahora ir a la derecha.
+        prevToResult = this.preorder(root.right);
+
+            // Paso 2.1. Almacenar el valor retornado por la función si es diferente de NULL.
+        if(prevToResult !== null){
+            result = [...result, ...prevToResult];
+        }
+
+        return result;
+
     }
 };
 
@@ -288,6 +317,7 @@ console.log(tree.levelOrderIterative(tree.root, function(num){
 //console.log(tree.levelOrderSecondMethod(tree.root) + ' Recursivo');
 
 console.log(tree.inorder(tree.root) + ' Inorder');
+console.log(tree.preorder(tree.root) + ' Preorder');
 
 
 module.exports = {sanitizeArray};
