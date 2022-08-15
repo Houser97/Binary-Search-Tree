@@ -101,6 +101,69 @@ class Tree {
         } else if(value > root.data){
             return this.find(root.right, value);
         };
+    };
+
+    levelOrderIterative(root, functionArg){
+        let arrayResult = [root.data];
+        let queue = [root.left, root.right];
+        while(queue.length > 0){
+            if(queue[0] !== null){ //En caso de que la raíz apunte a NULL en un hijo.
+                if(queue[0].left !== null){
+                    queue.push(queue[0].left);
+                };
+                if(queue[0].right !== null){
+                    queue.push(queue[0].right);
+                };
+                arrayResult.push(queue.shift().data);
+            } else {
+                queue.shift();
+            };
+        };
+        return arrayResult;
+    };
+
+    levelOrderSecondMethod(root){
+        let result = [root.data];
+        let queue = [];
+        let continueLoop = true;
+        if(root.left !== null){
+            queue.push(root.left);
+        };
+        if(root.right !== null){
+            queue.push(root.right);
+        };
+        if(root.right === null && root.left === null){
+            return result;
+        };
+
+        while(continueLoop){
+            if(queue === false){
+                continueLoop = false
+            } else {
+                queue.forEach(node => {
+                    result.push(node.data);
+                })
+                queue = this.createNextQeue(queue);
+            };
+        };
+        return result;
+    };
+
+    createNextQeue(currentQueue){
+        let queue = [];
+        currentQueue.forEach(node => {
+            if(node.left !== null){
+                queue.push(node.left);
+            };
+            if(node.right !== null){
+                queue.push(node.right);
+            };
+        }); 
+
+        if(queue.length === 0){
+            return false;
+        };
+        return queue;
     }
 };
 
@@ -177,7 +240,10 @@ let tree = new Tree(array)
 
 console.log(tree);
 //console.log(tree.remove(tree.root, 6));
-console.log(tree.find(tree.root, 8));
+//console.log(tree.find(tree.root, 8));
+
+console.log(tree.levelOrderIterative(tree.root) + ' Iterativo');
+console.log(tree.levelOrderSecondMethod(tree.root) + ' Recursivo');
 
 
 module.exports = {sanitizeArray};
