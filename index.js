@@ -407,11 +407,11 @@ const sanitizeArray = (array) => {
 
 
 
-let array = [0,1,5,3,7,10,15,21];
+// let array = [0,1,5,3,7,10,15,21];
 
-let tree = new Tree(array)
+// let tree = new Tree(array)
 
-console.log(tree);
+// console.log(tree);
 //console.log(tree.remove(tree.root, 6));
 //console.log(tree.find(tree.root, 8));
 
@@ -420,17 +420,17 @@ console.log(tree);
 // }) + ' Iterativo');
 //console.log(tree.levelOrderSecondMethod(tree.root) + ' Recursivo');
 
- console.log(tree.inorder(tree.root) + ' Inorder');
- console.log(tree.preorder(tree.root) + ' Preorder');
- console.log(tree.postorder(tree.root) + ' Postorder');
- console.log(tree.height(tree.root) + ' Height');
-// console.log(tree.height3(tree.root) + ' Height3');
-console.log(tree.depth(4) + ' Depth');
-console.log(tree.insert(this.root,10) + ' insert');
-console.log(tree.isBalanced() + ' Balanced');
-tree.rebalance();
-console.log(tree);
-console.log(tree.isBalanced() + ' Balanced');
+//  console.log(tree.inorder(tree.root) + ' Inorder');
+//  console.log(tree.preorder(tree.root) + ' Preorder');
+//  console.log(tree.postorder(tree.root) + ' Postorder');
+//  console.log(tree.height(tree.root) + ' Height');
+// // console.log(tree.height3(tree.root) + ' Height3');
+// console.log(tree.depth(4) + ' Depth');
+// console.log(tree.insert(this.root,10) + ' insert');
+// console.log(tree.isBalanced() + ' Balanced');
+// tree.rebalance();
+// console.log(tree);
+// console.log(tree.isBalanced() + ' Balanced');
 
 
 module.exports = {sanitizeArray, Node, Tree};
