@@ -104,22 +104,40 @@ class Tree {
     };
 
     levelOrderIterative(root, functionArg){
-        let arrayResult = [root.data];
         let queue = [root.left, root.right];
-        while(queue.length > 0){
-            if(queue[0] !== null){ //En caso de que la raíz apunte a NULL en un hijo.
-                if(queue[0].left !== null){
-                    queue.push(queue[0].left);
+        if(typeof functionArg === 'undefined'){
+            let arrayResult = [root.data];
+            while(queue.length > 0){
+                if(queue[0] !== null){ //En caso de que la raíz apunte a NULL en un hijo.
+                    if(queue[0].left !== null){
+                        queue.push(queue[0].left);
+                    };
+                    if(queue[0].right !== null){
+                        queue.push(queue[0].right);
+                    };
+                    arrayResult.push(queue.shift().data);
+                } else {
+                    queue.shift(); //Si el nodo es NULL, se elimina simplemente.
                 };
-                if(queue[0].right !== null){
-                    queue.push(queue[0].right);
-                };
-                arrayResult.push(queue.shift().data);
-            } else {
-                queue.shift();
             };
+            return arrayResult;
+        } else {
+            let arrayResult = [];
+            while(queue.length > 0){
+                if(queue[0] !== null){ //En caso de que la raíz apunte a NULL en un hijo.
+                    if(queue[0].left !== null){
+                        queue.push(queue[0].left);
+                    };
+                    if(queue[0].right !== null){
+                        queue.push(queue[0].right);
+                    };
+                    arrayResult.push(functionArg(queue.shift().data));
+                } else {
+                    queue.shift();
+                };
+            };
+            return arrayResult
         };
-        return arrayResult;
     };
 
     levelOrderSecondMethod(root){
@@ -164,6 +182,28 @@ class Tree {
             return false;
         };
         return queue;
+    };
+
+    inorder(root){
+        if(root === null) return null;
+
+        let resultPrev;
+
+        let result = [];
+        resultPrev = this.inorder(root.left);
+        // Pasando la línea anterior ya se llegó al caso base, por lo que en este contexto
+        // se puede acceder al nodo más a la izquierda.
+        if(resultPrev !== null){
+            result = [...result, ...resultPrev];
+        }; 
+        result = [...result, root.data]
+        resultPrev = this.inorder(root.right);
+        if(resultPrev !== null){
+            result = [...result, ...resultPrev];
+        }; 
+        // Ahora se debe ir a la derecha, si es que hay algún nodo. De lo contrario, se acaba ahí
+        // la función y se regresa a este contexto, en donde se puede retornar RESULT.
+        return result;
     }
 };
 
@@ -242,8 +282,12 @@ console.log(tree);
 //console.log(tree.remove(tree.root, 6));
 //console.log(tree.find(tree.root, 8));
 
-console.log(tree.levelOrderIterative(tree.root) + ' Iterativo');
-console.log(tree.levelOrderSecondMethod(tree.root) + ' Recursivo');
+console.log(tree.levelOrderIterative(tree.root, function(num){
+    return num < 3;
+}) + ' Iterativo');
+//console.log(tree.levelOrderSecondMethod(tree.root) + ' Recursivo');
+
+console.log(tree.inorder(tree.root) + ' Inorder');
 
 
 module.exports = {sanitizeArray};
