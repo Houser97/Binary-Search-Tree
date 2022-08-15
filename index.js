@@ -233,7 +233,36 @@ class Tree {
 
         return result;
 
-    }
+    };
+
+    postorder(root){
+        if(root === null) return null;
+
+        let result = [];
+        let prevToResult;
+
+        // Paso 1. Ir hasta el nodo más a la izquierda.
+        prevToResult = this.postorder(root.left);
+
+        // Paso 1.2. Almacenar el valor retornado de la función.
+        if(prevToResult !== null){
+            result = [...result, ...prevToResult];
+        }
+
+        // Paso 2. Llegado al nodo más a la izquierda, ahora se va a la derecha.
+        prevToResult = this.postorder(root.right);
+        if(prevToResult !== null){
+            result = [...result, ...prevToResult];
+        }
+
+        // Paso 3. Al ya no haber ni nodos a la izquierda o derecha, o si ya se leyeron, toca leer
+        // este nodo.
+        //console.log(root.data);
+        result.push(root.data);
+
+        return result;
+
+    };
 };
 
 const mergeSort = (array) => {
@@ -318,6 +347,7 @@ console.log(tree.levelOrderIterative(tree.root, function(num){
 
 console.log(tree.inorder(tree.root) + ' Inorder');
 console.log(tree.preorder(tree.root) + ' Preorder');
+console.log(tree.postorder(tree.root) + ' Postorder');
 
 
 module.exports = {sanitizeArray};
